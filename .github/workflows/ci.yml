@@ -22,8 +22,11 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/hello-world:${{ github.sha }} .
+          IMAGE_NAME="${{ secrets.DOCKERHUB_USERNAME }}/hello-world"
+          IMAGE_TAG="${{ github.sha }}"
+          docker build -t $IMAGE_NAME:$IMAGE_TAG .
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/hello-world:${{ github.sha }}
+          docker push $IMAGE_NAME:$IMAGE_TAG
+      
       
       

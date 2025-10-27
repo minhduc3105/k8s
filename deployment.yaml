@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
         - name: hello-world
-          image: minhduc857/hello-world:latest  # <-- thay image ở đây
+          image: minhduc857/hello-world:${GITHUB_SHA}  # CI sẽ replace ${GITHUB_SHA} thành commit SHA thật
           ports:
-            - containerPort: 8080               # port đúng với app của bạn
+            - containerPort: 8080
+
