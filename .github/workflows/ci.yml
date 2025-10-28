@@ -38,8 +38,9 @@ jobs:
         run: |
           IMAGE_TAG=${{ github.sha }}
           git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/minhduc3105/k8s-config.git
+          cd k8s-config/base
           sed -i "s#image: .*#image: ${{ secrets.DOCKERHUB_USERNAME }}/hello-world:${IMAGE_TAG}#" deployment.yaml
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git commit -am "Update image tag to ${IMAGE_TAG}"
+          git commit -am "Update imasge tag to ${IMAGE_TAG}"
           git push
