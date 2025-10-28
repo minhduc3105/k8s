@@ -37,13 +37,9 @@ jobs:
       - name: Update image tag in deploy repo
         run: |
           IMAGE_TAG=${{ github.sha }}
-          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/minhduc3105/k8s-config.git
+          git clone https://x-access-token:${{ secrets.DEPLOY_REPO_TOKEN }}@github.com/minhduc3105/k8s-config.git
           cd k8s-config/base
-          echo "Before change:"
-          cat kustomization.yaml
           kustomize edit set image minhduc857/hello-world=minhduc857/hello-world:${IMAGE_TAG}
-          echo "After change:"
-          cat kustomization.yaml
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add .
